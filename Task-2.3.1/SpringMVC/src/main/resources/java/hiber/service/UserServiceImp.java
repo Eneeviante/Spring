@@ -34,12 +34,12 @@ public class UserServiceImp implements UserService {
         return userDao.findById(id);
     }
 
-    public void update(User user){
-        userDao.update(user);
+    public void update(long id, User user){
+        userDao.update(id, user);
     }
 
-    public void delete(User user){
-        userDao.delete(user);
+    public void delete(long id){
+        userDao.delete(id);
     }
 }
 

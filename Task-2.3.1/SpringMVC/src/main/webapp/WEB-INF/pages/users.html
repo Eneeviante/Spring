@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User List</title>
+    <title>Users List</title>
 </head>
 <body>
 <div class="container mt-5">
@@ -14,6 +14,7 @@
             <th>FirstName</th>
             <th>LastName</th>
             <th>Email</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -22,8 +23,12 @@
             <td th:text="${user.getFirstName()}"></td>
             <td th:text="${user.getLastName()}"></td>
             <td th:text="${user.getEmail()}"></td>
+            <td>
+                <a th:href="@{/users/{id}(id=${user.getId()})}" class="edit-link">Edit</a>
+            </td>
         </tr>
         </tbody>
+        <a href="/users/new">Create new person</a>
     </table>
 </div>
 </body>

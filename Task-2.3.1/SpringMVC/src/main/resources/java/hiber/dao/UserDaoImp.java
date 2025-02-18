@@ -1,8 +1,10 @@
 package hiber.dao;
 import hiber.model.User;
+import org.hibernate.HibernateException;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transaction;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class UserDaoImp implements UserDao {
 
     @Transactional
     public void add(User user) {
-        entityManager.persist(user);
+            entityManager.persist(user);
     }
 
     public User findById(Long id) {
@@ -26,12 +28,17 @@ public class UserDaoImp implements UserDao {
     }
 
     @Transactional
-    public void update(User user) {
+    public void update(long id, User new_user) {
+        User user = findById(id);
+        user.setFirstName(new_user.getFirstName());
+        user.setLastName(new_user.getLastName());
+        user.setEmail(new_user.getEmail());
         entityManager.merge(user);
     }
 
     @Transactional
-    public void delete(User user) {
-        entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
+    public void delete(long id) {
+        User user = entityManager.find(User.class, id);
+        entityManager.remove(user);
     }
 }
