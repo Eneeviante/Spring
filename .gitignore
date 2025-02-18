@@ -1,3 +1,5 @@
 */target
 */.idea
 *.iml
+*/SpringMVC/target
+*/SpringMVC/.idea
